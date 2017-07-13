@@ -7,6 +7,7 @@ const configuration = require('../configuration');
 class Device {
 
   constructor(deviceConfig, sessionConfig, deviceDriver) {
+    console.log('AAAAAA', deviceConfig);
     this._deviceConfig = deviceConfig;
     this._sessionConfig = sessionConfig;
     this.deviceDriver = deviceDriver;
@@ -14,11 +15,13 @@ class Device {
 
   async prepare() {
     this._binaryPath = this._getAbsolutePath(this._deviceConfig.binaryPath);
+    console.log('BBBBBB', this._binaryPath);
     this._deviceId = await this.deviceDriver.acquireFreeDevice(this._deviceConfig.name);
+    console.log('BBBBBB', this._deviceId);
     this._bundleId = await this.deviceDriver.getBundleIdFromBinary(this._binaryPath);
+    console.log('BBBBBB', this._bundleId);
 
     await this.deviceDriver.boot(this._deviceId);
-    await this.relaunchApp({delete: !argparse.getArgValue('reuse')});
   }
 
   async relaunchApp(params = {}, bundleId) {

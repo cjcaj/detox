@@ -20,6 +20,8 @@ class Fbsimctl {
       trying: `Listing devices...`
     };
     const query = this._getQueryFromDevice(device);
+    console.log('FFFFFF', query);
+    console.log('FFFFFF', `${query} --first 1 --simulators list`);
     const options = {args: `${query} --first 1 --simulators list`};
     let result = {};
     let simId;
